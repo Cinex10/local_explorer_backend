@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from app.core.config import settings
-from app.routes import location
+from core.config import settings
+from routes import location
 from fastapi.middleware.cors import CORSMiddleware
 
 

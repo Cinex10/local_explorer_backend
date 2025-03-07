@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 import httpx
-from app.core.config import settings
-from app.models.schemas import LocationResponse
+from core.config import settings
+from models.schemas import LocationResponse
 
 async def get_location_name(lat: float, lon: float) -> LocationResponse:
     """Get location name from coordinates using reverse geocoding"""

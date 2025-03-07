@@ -2,7 +2,7 @@ from datetime import datetime
 from enum import Enum
 from pydantic import BaseModel, Field
 from typing import Dict, List, Optional
-from app.core.config import settings
+from core.config import settings
 
 
 class PlaceType(str, Enum):
@@ -21,6 +21,23 @@ class PlaceType(str, Enum):
     BEACH = "beach"
     ZOO = "zoo"
     BOTANICAL_GARDEN = "botanical_garden"
+    
+    # Nouveaux types ajoutés
+    AQUARIUM = "aquarium"
+    THEATER = "theater"
+    CONCERT_HALL = "concert_hall"
+    NIGHT_CLUB = "night_club"
+    BAR = "bar"
+    CASINO = "casino"
+    STADIUM = "stadium"
+    CHURCH = "church"
+    MOSQUE = "mosque"
+    TEMPLE = "temple"
+    HISTORICAL_LANDMARK = "historical_landmark"
+    MARKET = "market"
+    BOOKSTORE = "bookstore"
+    GALLERY = "gallery"
+    VIEWPOINT = "viewpoint"
     
     @classmethod
     def from_google_type(cls, types: List[str]) -> List['PlaceType']:
@@ -42,6 +59,31 @@ class PlaceType(str, Enum):
             'beach': cls.BEACH,
             'zoo': cls.ZOO,
             'botanical_garden': cls.BOTANICAL_GARDEN,
+            
+            # Nouveaux mappings
+            'aquarium': cls.AQUARIUM,
+            'theater': cls.THEATER,
+            'performing_arts_theater': cls.THEATER,
+            'concert_hall': cls.CONCERT_HALL,
+            'night_club': cls.NIGHT_CLUB,
+            'bar': cls.BAR,
+            'casino': cls.CASINO,
+            'stadium': cls.STADIUM,
+            'sports_complex': cls.STADIUM,
+            'church': cls.CHURCH,
+            'mosque': cls.MOSQUE,
+            'temple': cls.TEMPLE,
+            'place_of_worship': cls.CHURCH,  # Mapping générique
+            'historic_site': cls.HISTORICAL_LANDMARK,
+            'landmark': cls.HISTORICAL_LANDMARK,
+            'market': cls.MARKET,
+            'marketplace': cls.MARKET,
+            'bookstore': cls.BOOKSTORE,
+            'book_store': cls.BOOKSTORE,
+            'art_gallery': cls.GALLERY,
+            'gallery': cls.GALLERY,
+            'viewpoint': cls.VIEWPOINT,
+            'scenic_lookout': cls.VIEWPOINT
         }
         r = set()
         for t in types:
@@ -118,7 +160,6 @@ class Place(BaseModel):
     @classmethod
     def from_google_json(cls, json_data: Dict) -> 'Place':
         """Create Place instance from Google Places API JSON response"""
-
         return cls(
             name=json_data["displayName"]["text"],
             address=json_data.get("shortFormattedAddress", ""),

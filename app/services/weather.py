@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 import httpx
-from app.core.config import settings
-from app.models.schemas import WeatherResponse
+from core.config import settings
+from models.schemas import WeatherResponse
 
 async def get_weather(lat: float, lon: float) -> WeatherResponse:
     """Get weather data from OpenWeather API"""

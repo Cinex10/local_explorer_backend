@@ -1,8 +1,7 @@
 import json
-from typing import List, Dict
-import httpx
-from app.core.config import settings
-from app.models.schemas import WeatherResponse, LocationResponse, PlaceType, Place
+from typing import List
+from core.config import settings
+from models.schemas import WeatherResponse, LocationResponse, PlaceType, Place
 from groq import AsyncGroq
 
 
@@ -34,13 +33,13 @@ Suggest exactly 5 most appropriate place types from this list for the current we
 museum, art_gallery, movie_theater, shopping_mall, restaurant, cafe, library, gym, spa, park, tourist_attraction, amusement_park, beach, zoo, botanical_garden
 
 Return only a JSON array of 10 place types without any extra text. Example:
-["museum", "art_gallery", "cafe", "library", "restaurant", "gym", "park", "tourist_attraction", "amusement_park", "shopping_mall"]"""
+["museum", "art_gallery", "cafe", "library", "restaurant", "gym", "park", "tourist_attraction", "amusement_park", "shopping_mall", "aquarium", "theater", "performing_arts_theater", "concert_hall", "night_club", "bar", "casino", "stadium", "sports_complex", "church", "mosque", "temple", "place_of_worship", "historic_site", "landmark", "market", "marketplace", "bookstore", "book_store", "art_gallery", "gallery", "viewpoint", "scenic_lookout"]"""
 
     response = await get_groq_suggestion(prompt)
-    print(response)
+    # pdb.set_trace()
     try:
         place_types = json.loads(response)
-        return [PlaceType(pt) for pt in place_types]
+        return PlaceType.from_google_type(place_types)
     except json.JSONDecodeError:
         print(f"Error decoding Groq response: {response}")
         return []

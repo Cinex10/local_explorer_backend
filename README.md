@@ -43,6 +43,11 @@ GROQ_API_KEY=your_key
 MODEL="llama-3.1-8b-instant"
 ```
 
+4. Start the server:
+```bash
+uvicorn app.main:app --reload
+```
+
 ## API Reference
 
 The service provides various endpoints for accessing location data. Key features include:

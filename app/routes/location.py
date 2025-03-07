@@ -1,11 +1,11 @@
 from fastapi import APIRouter
 import asyncio
 
-from app.models.schemas import LocationRequest, LocationInfoResponse
-from app.services.nearby_places import get_nearby_places
-from app.services.place_recommender import filter_and_sort_places, get_recommended_place_types
-from app.services.weather import get_weather
-from app.services.geocoding import get_location_name
+from models.schemas import LocationRequest, LocationInfoResponse
+from services.nearby_places import get_nearby_places
+from services.place_recommender import filter_and_sort_places, get_recommended_place_types
+from services.weather import get_weather
+from services.geocoding import get_location_name
 
 router = APIRouter()
 
